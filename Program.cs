@@ -12,16 +12,28 @@ static void Menu() {
   switch(option) {
     case 0: System.Environment.Exit(0); break;
     case 1: Open(); break;
-    case 2: Edit(); break;
+    case 2: Create(); break;
     default: Menu(); break;
   }
 }
 
 static void Open() {
-  Console.WriteLine("Open file");
+  Console.Clear();
+  Console.WriteLine("Which file path?");
+  string path = Console.ReadLine()!;
+
+  using(var file = new StreamReader(path)) 
+  {
+    string text = file.ReadToEnd();
+    Console.WriteLine(text);
+  }
+
+  Console.WriteLine("");
+  Console.ReadLine();
+  Menu();
 }
 
-static void Edit() {
+static void Create() {
   Console.Clear();
   Console.WriteLine("Enter your text below (ESC to exit)");
   Console.WriteLine("-----------------");
